@@ -1,23 +1,21 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext} from "react";
+import LoginContext from '../Utils/LoginContext';
 import Input from '../Components/Input';
 
 function Signup(){
-    const [email, setEmail] = useState("");
-    const placeholder = "I'm a Placeholder";
+    const {email, password, setEmail, setPassword} = useContext(LoginContext);
 
     function displayState(){
-        console.log(email);
+        alert(`I probably shouldn't tell you this, but your email is: ${email} and your password is: ${password}`);
+        setEmail("");
+        setPassword("");
     }
-
-    useEffect(() => {
-        setEmail("zekkxx@gmail.com");
-    }, [])
 
     return(
         <div>
-            <Input name="email" placeholder={placeholder} value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Input name="password" type="password"/>
-            <input type="button" onClick={displayState} />
+            <Input name="email" placeholder={"Email"} value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <Input name="password" placeholder={"Password"} type="password"  value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <input type="button" onClick={displayState} value="Submit"/>
         </div>
     )
 }
